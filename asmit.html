@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asmit Adk - Creative Developer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #000000;
+      --surface: #0f0f0f;
+      --primary: #00ffff;
+      --secondary: #ff00ff;
+      --accent: #ffff00;
+      --text: #ffffff;
+      --muted: #666666;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.1s ease;
+      mix-blend-mode: difference;
+    }
+
+    .cursor-follower {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.15s ease;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 20s infinite;
+    }
+
+    .orb1 {
+      width: 500px;
+      height: 500px;
+      background: var(--primary);
+      top: -250px;
+      left: -250px;
+      animation-delay: 0s;
+    }
+
+    .orb2 {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      bottom: -200px;
+      right: -200px;
+      animation-delay: 7s;
+    }
+
+    .orb3 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
+      top: 50%;
+      left: 50%;
+      animation-delay: 14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(100px, -100px) scale(1.2); }
+      66% { transform: translate(-100px, 100px) scale(0.8); }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 2rem 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .logo::before {
+      content: '< ';
+      color: var(--primary);
+    }
+
+    .logo::after {
+      content: ' />';
+      color: var(--secondary);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--text);
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.8rem 2rem;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      transition: left 0.3s;
+      z-index: -1;
+    }
+
+    .nav-cta:hover {
+      color: var(--bg);
+    }
+
+    .nav-cta:hover::before {
+      left: 0;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 0.2s;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 0.4s;
+    }
+
+    .hero-title .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--muted);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 0.6s;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 0.8s;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards 1s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      padding: 1.2rem 3rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: var(--bg);
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-5px);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .scroll-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .scroll-line {
+      width: 2px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--primary), transparent);
+      animation: scroll 2s infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(20px); opacity: 0; }
+    }
+
+    /* Section */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 5rem;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 1.3rem;
+      color: var(--muted);
+    }
+
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+    }
+
+    .card:hover::before {
+      opacity: 0.05;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .card-text {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .skill::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    .skill:hover::after {
+      transform: scaleX(1);
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      padding-left: 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -3.5rem;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    .timeline-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-text {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    .stat:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      padding: 8rem 4rem;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+      border-radius: 30px;
+      margin: 6rem 0;
+    }
+
+    .cta-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .cta-text {
+      font-size: 1.3rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 2rem;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      animation: float-avatar 3s ease-in-out infinite;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes float-avatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Footer */
+    footer {
+      padding: 5rem 4rem 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: var(--bg);
+      transform: translateY(-5px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .hero, section {
+        padding: 4rem 2rem;
+      }
+
+      .nav-content {
+        padding: 0 2rem;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div class="bg-animation">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <nav>
+    <div class="nav-content">
+      <div class="logo">ASMIT</div>
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#cta" class="nav-cta">Let's Talk</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">// CREATIVE DEVELOPER</div>
+      <h1 class="hero-title">
+        <span class="glitch">Hi, I'm</span><br>
+        <span class="highlight">ASMIT ADK</span>
+      </h1>
+      <p class="hero-subtitle">Building Digital Experiences That Matter</p>
+      <p class="hero-description">
+        A passionate web developer from Nepal, crafting modern web solutions with clean code 
+        and creative design. Currently exploring the intersection of technology and creativity.
+      </p>
+      <div class="hero-buttons">
+        <a href="#journey" class="btn btn-primary">Explore My Work</a>
+        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-text">Scroll Down</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="section-header">
+      <div class="section-tag">// WHO I AM</div>
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">Management student turned code enthusiast</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3 class="card-title">Student</h3>
+        <p class="card-text">Pursuing +2 Management at NEB Nepal, majoring in Computer and Accounting with a focus on modern business practices.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🇳🇵</div>
+        <h3 class="card-title">Location</h3>
+        <p class="card-text">Based in Bharatpur, Chitwan, Nepal. Proud to represent the heart of Nepal's tech community.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🗣️</div>
+        <h3 class="card-title">Trilingual</h3>
+        <p class="card-text">Fluent in Nepali, English, and Hindi. Communication is key in global collaboration.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3 class="card-title">Fast Learner</h3>
+        <p class="card-text">Constantly adapting and growing in the ever-evolving world of web development.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3 class="card-title">Team Player</h3>
+        <p class="card-text">Strong communication skills with a collaborative mindset for team success.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3 class="card-title">Goal-Driven</h3>
+        <p class="card-text">Committed to excellence in every project with attention to detail and quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-tag">// MY ARSENAL</div>
+      <h2 class="section-title">Skills & Tools</h2>
+      <p class="section-subtitle">Technologies I use to bring ideas to life</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-name">HTML5</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">CSS3</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">JavaScript</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Responsive Design</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">UI/UX</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">GitHub</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">VS Code</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">MS Office</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Problem Solving</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Years Learning</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Core Skills</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Dedication</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Learning Spirit</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="section-header">
+      <div class="section-tag">// MY JOURNEY</div>
+      <h2 class="section-title">Education</h2>
+      <p class="section-subtitle">The path that shaped my skills</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">CURRENT</div>
+        <h3 class="timeline-title">+2 Management</h3>
+        <p class="timeline-text">
+          Pursuing higher secondary education in Management stream with majors in Computer Science 
+          and Accounting from National Examination Board (NEB), Nepal. Developing strong analytical 
+          and business skills alongside technical knowledge.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Email Function
+    function openLink() {
+      window.location.href = 'https://www.instagram.com/asmitnotfound._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==';
+    }
+
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+
+      setTimeout(() => {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+      }, 100);
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Scroll Animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card, .skill, .timeline-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">COMPLETED</div>
+        <h3 class="timeline-title">Secondary Education (SEE)</h3>
+        <p class="timeline-text">
+          Successfully completed Grade 10 from Government of Nepal with good grades, 
+          building a strong academic foundation that supports my current pursuits.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-tag">// BEYOND WORK</div>
+      <h2 class="section-title">Hobbies & Interests</h2>
+      <p class="section-subtitle">What I do when I'm not coding</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3 class="card-title">Coding</h3>
+        <p class="card-text">Building side projects and experimenting with new technologies to expand my skills.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎥</div>
+        <h3 class="card-title">Tech Content</h3>
+        <p class="card-text">Watching tech videos and tutorials to stay updated with the latest industry trends.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎵</div>
+        <h3 class="card-title">Music</h3>
+        <p class="card-text">Finding inspiration through music while working on creative projects.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3 class="card-title">Learning</h3>
+        <p class="card-text">Continuously exploring new skills and knowledge areas beyond development.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta" id="cta">
+    <div class="avatar">
+      <img src="https://github.com/erickhuyrr/Asmitdwner/blob/main/575072965_1517195146147598_726041324212076456_n.jpg?raw=true" alt="Asmit Adk Photo">
+    </div>
+    <h2 class="cta-title">Let's Build Something Amazing</h2>
+    <p class="cta-text">
+      Have a project in mind? I'm always excited to discuss new opportunities 
+      and collaborate on creative ideas. Let's turn your vision into reality!
+    </p>
+    <div class="hero-buttons" style="justify-content: center;">
+      <button onclick="openLink()" class="btn btn-primary" style="cursor: pointer;">Start Conversation</button>
+      <a href="index.html" class="btn btn-secondary">View My Work</a>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">&lt; ASMIT /&gt;</div>
+        <p class="footer-text">
+          Web Developer & Tech Enthusiast based in Bharatpur, Nepal. 
+          Passionate about creating digital experiences that make a difference.
