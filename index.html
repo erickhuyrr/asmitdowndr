@@ -1,0 +1,2524 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google Site Verification -->
+        <meta
+            name="google-site-verification"
+            content="Ft7-OGSFjAP0HfUyzys629CSYU74ffhAhTGP4l1hMKk"/>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Asmit-Platform Video Downloader</title>
+        <!-- PWA Meta Tags -->
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#667eea">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Asmit Downloader">
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+                padding-top: 80px;
+            }
+            /* 🚀 2025 NEXT-GEN FUTURISTIC MENU - REVOLUTIONARY DESIGN 🚀 */
+
+            /* Floating Orb Menu Button */
+            .menu-button {
+                position: fixed;
+                top: 8px;
+                right: 25px;
+                width: 56px;
+                height: 56px;
+                background: linear-gradient(135deg, 
+                    rgba(30, 30, 50, 0.7) 0%,
+                    rgba(50, 30, 80, 0.7) 100%);
+                backdrop-filter: blur(25px) brightness(1.3);
+                -webkit-backdrop-filter: blur(25px) brightness(1.3);
+                border: 2px solid;
+                border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff) 1;
+                clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                cursor: pointer;
+                z-index: 1001;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: 
+                    0 0 30px rgba(0, 255, 255, 0.3),
+                    0 0 60px rgba(255, 0, 255, 0.2),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+                animation: menuFloat 4s ease-in-out infinite;
+            }
+
+            @keyframes menuFloat {
+                0%, 100% {
+                    transform: translateY(0) rotate(0deg);
+                    box-shadow: 
+                        0 0 30px rgba(0, 255, 255, 0.3),
+                        0 0 60px rgba(255, 0, 255, 0.2);
+                }
+                50% {
+                    transform: translateY(-5px) rotate(5deg);
+                    box-shadow: 
+                        0 0 50px rgba(0, 255, 255, 0.5),
+                        0 0 80px rgba(255, 0, 255, 0.4);
+                }
+            }
+
+            .menu-button::before {
+                content: '';
+                position: absolute;
+                inset: -15px;
+                clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+                background: conic-gradient(
+                    from 0deg,
+                    transparent,
+                    rgba(0, 255, 255, 0.3),
+                    transparent,
+                    rgba(255, 0, 255, 0.3),
+                    transparent,
+                    rgba(255, 255, 0, 0.3),
+                    transparent
+                );
+                animation: orbitSpin 4s linear infinite;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .menu-button:hover::before {
+                opacity: 1;
+            }
+
+            @keyframes orbitSpin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            .menu-button:hover {
+                transform: scale(1.15) rotate(10deg);
+                background: linear-gradient(135deg, 
+                    rgba(40, 40, 70, 0.9) 0%,
+                    rgba(70, 40, 100, 0.9) 100%);
+                box-shadow: 
+                    0 0 50px rgba(0, 255, 255, 0.6),
+                    0 0 100px rgba(255, 0, 255, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.2);
+            }
+
+            .menu-button:active {
+                transform: scale(1.05) rotate(5deg);
+            }
+
+            /* Neon Dots */
+            .menu-dot {
+                width: 5px;
+                height: 5px;
+                background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+                border-radius: 50%;
+                box-shadow: 
+                    0 0 10px #00ffff,
+                    0 0 20px #ff00ff;
+                transition: all 0.3s ease;
+                animation: dotPulse 2s ease-in-out infinite;
+            }
+
+            @keyframes dotPulse {
+                0%, 100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.6;
+                    transform: scale(1.3);
+                }
+            }
+
+            .menu-button:hover .menu-dot {
+                width: 7px;
+                height: 7px;
+                box-shadow: 
+                    0 0 15px #00ffff,
+                    0 0 30px #ff00ff,
+                    0 0 45px #ffff00;
+            }
+
+            .menu-button:hover .menu-dot:nth-child(1) {
+                animation: dotExplode 0.6s ease-in-out infinite;
+            }
+
+            .menu-button:hover .menu-dot:nth-child(2) {
+                animation: dotExplode 0.6s ease-in-out 0.2s infinite;
+            }
+
+            .menu-button:hover .menu-dot:nth-child(3) {
+                animation: dotExplode 0.6s ease-in-out 0.4s infinite;
+            }
+
+            @keyframes dotExplode {
+                0%, 100% {
+                    transform: scale(1) translateY(0);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(2) translateY(-8px);
+                    opacity: 0.5;
+                }
+            }
+
+            /* 2025 Futuristic Dropdown Menu */
+            .dropdown-menu {
+                position: fixed;
+                top: 75px;
+                right: 25px;
+                min-width: 360px;
+                background: linear-gradient(135deg,
+                    rgba(20, 20, 40, 0.85) 0%,
+                    rgba(40, 20, 60, 0.85) 100%);
+                backdrop-filter: blur(50px) saturate(150%);
+                -webkit-backdrop-filter: blur(50px) saturate(150%);
+                border-radius: 0;
+                clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+                padding: 25px;
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.5),
+                    0 0 2px rgba(0, 255, 255, 0.8),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                border: 2px solid transparent;
+                border-image: linear-gradient(135deg, 
+                    rgba(0, 255, 255, 0.5) 0%,
+                    rgba(255, 0, 255, 0.5) 50%,
+                    rgba(255, 255, 0, 0.5) 100%) 1;
+                z-index: 1000;
+                opacity: 0;
+                transform: translateY(-40px) rotateX(-25deg) scale(0.8);
+                transform-origin: top right;
+                pointer-events: none;
+                transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                perspective: 1500px;
+            }
+
+            /* Animated Scan Lines */
+            .dropdown-menu::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                background: repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 255, 0.03) 2px,
+                    rgba(0, 255, 255, 0.03) 4px
+                );
+                pointer-events: none;
+                animation: scanLines 8s linear infinite;
+            }
+
+            @keyframes scanLines {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(20px); }
+            }
+
+            /* Corner Accents */
+            .dropdown-menu::after {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+                background: linear-gradient(
+                    45deg,
+                    rgba(0, 255, 255, 0.3) 0%,
+                    transparent 20%,
+                    transparent 80%,
+                    rgba(255, 0, 255, 0.3) 100%
+                );
+                background-size: 200% 200%;
+                animation: borderGlow 3s ease-in-out infinite;
+                z-index: -1;
+            }
+
+            @keyframes borderGlow {
+                0%, 100% {
+                    background-position: 0% 50%;
+                    opacity: 0.5;
+                }
+                50% {
+                    background-position: 100% 50%;
+                    opacity: 1;
+                }
+            }
+
+            .dropdown-menu.show {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+                pointer-events: all;
+            }
+
+            /* Cyberpunk Menu Items */
+            .menu-item {
+                position: relative;
+                padding: 16px 20px;
+                margin-bottom: 12px;
+                color: rgba(255, 255, 255, 0.95);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                background: rgba(255, 255, 255, 0.02);
+                border-left: 3px solid transparent;
+                border-right: 3px solid transparent;
+                clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                font-weight: 600;
+                font-size: 0.95em;
+                cursor: pointer;
+                overflow: hidden;
+            }
+
+            /* Holographic Sweep */
+            .menu-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -200%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 255, 255, 0.4) 50%,
+                    transparent 100%
+                );
+                transform: skewX(-30deg);
+                transition: left 0.8s ease;
+            }
+
+            .menu-item:hover::before {
+                left: 200%;
+            }
+
+            /* Energy Pulse Line */
+            .menu-item::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(90deg, #00ffff 0%, #ff00ff 50%, #ffff00 100%);
+                box-shadow: 
+                    0 0 10px currentColor,
+                    0 0 20px currentColor;
+                transition: width 0.4s ease;
+            }
+
+            .menu-item:hover {
+                background: rgba(0, 255, 255, 0.05);
+                border-left: 3px solid #00ffff;
+                border-right: 3px solid #ff00ff;
+                transform: translateX(-8px) scale(1.02);
+                box-shadow: 
+                    -5px 0 20px rgba(0, 255, 255, 0.3),
+                    5px 0 20px rgba(255, 0, 255, 0.3),
+                    inset 0 0 20px rgba(255, 255, 255, 0.05);
+            }
+
+            .menu-item:hover::after {
+                width: 100%;
+            }
+
+            .menu-item:active {
+                transform: translateX(-5px) scale(0.98);
+            }
+
+            .menu-item:last-child {
+                margin-bottom: 0;
+            }
+
+            /* Animated Icon */
+            .menu-item-icon {
+                font-size: 1.4em;
+                filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .menu-item:hover .menu-item-icon {
+                transform: scale(1.3) rotate(15deg) translateX(-5px);
+                filter: 
+                    drop-shadow(0 0 15px rgba(0, 255, 255, 0.8))
+                    drop-shadow(0 0 25px rgba(255, 0, 255, 0.6));
+                animation: iconGlitch 0.3s ease-in-out;
+            }
+
+            @keyframes iconGlitch {
+                0%, 100% { transform: scale(1.3) rotate(15deg) translateX(-5px); }
+                25% { transform: scale(1.35) rotate(18deg) translateX(-3px); }
+                50% { transform: scale(1.25) rotate(12deg) translateX(-7px); }
+                75% { transform: scale(1.32) rotate(16deg) translateX(-4px); }
+            }
+
+            /* Tech Divider */
+            .bg-settings {
+                padding: 20px 20px 18px;
+                margin-top: 15px;
+                border-top: 1px solid rgba(0, 255, 255, 0.2);
+                position: relative;
+            }
+
+            .bg-settings::before {
+                content: '';
+                position: absolute;
+                top: -1px;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #00ffff 25%,
+                    #ff00ff 50%,
+                    #ffff00 75%,
+                    transparent 100%
+                );
+                animation: dividerPulse 3s ease-in-out infinite;
+            }
+
+            @keyframes dividerPulse {
+                0%, 100% {
+                    opacity: 0.5;
+                    filter: blur(0px);
+                }
+                50% {
+                    opacity: 1;
+                    filter: blur(2px);
+                }
+            }
+
+            .bg-settings::after {
+                content: '◆';
+                position: absolute;
+                top: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #00ffff;
+                font-size: 0.8em;
+                text-shadow: 
+                    0 0 10px #00ffff,
+                    0 0 20px #ff00ff;
+                animation: diamondSpin 4s linear infinite;
+            }
+
+            @keyframes diamondSpin {
+                0% { transform: translateX(-50%) rotate(0deg); }
+                100% { transform: translateX(-50%) rotate(360deg); }
+            }
+
+            .bg-settings-title {
+                font-size: 0.75em;
+                color: rgba(0, 255, 255, 0.8);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 14px;
+                text-shadow: 
+                    0 0 10px rgba(0, 255, 255, 0.5),
+                    0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Futuristic Input */
+            .gif-input-group {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .gif-url-input {
+                padding: 14px 18px;
+                background: rgba(0, 255, 255, 0.03);
+                border: 2px solid rgba(0, 255, 255, 0.2);
+                border-radius: 0;
+                clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+                color: rgba(255, 255, 255, 0.95);
+                font-size: 0.9em;
+                font-weight: 500;
+                font-family: 'Courier New', monospace;
+                transition: all 0.4s ease;
+                box-shadow: 
+                    inset 0 2px 8px rgba(0, 0, 0, 0.3),
+                    0 0 0 rgba(0, 255, 255, 0);
+            }
+
+            .gif-url-input::placeholder {
+                color: rgba(0, 255, 255, 0.4);
+                font-family: 'Courier New', monospace;
+            }
+
+            .gif-url-input:focus {
+                outline: none;
+                background: rgba(0, 255, 255, 0.08);
+                border: 2px solid rgba(0, 255, 255, 0.6);
+                box-shadow: 
+                    inset 0 2px 8px rgba(0, 0, 0, 0.3),
+                    0 0 20px rgba(0, 255, 255, 0.4),
+                    0 0 40px rgba(0, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            /* Cyber Buttons */
+            .gif-buttons {
+                display: flex;
+                gap: 12px;
+            }
+
+            .gif-btn {
+                flex: 1;
+                padding: 14px 20px;
+                border: 2px solid;
+                border-radius: 0;
+                clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+                font-size: 0.88em;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Energy Wave Effect */
+            .gif-btn::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s ease, height 0.6s ease;
+                border-radius: 50%;
+            }
+
+            .gif-btn:active::before {
+                width: 500px;
+                height: 500px;
+            }
+
+            .gif-btn-apply {
+                background: linear-gradient(135deg, 
+                    rgba(0, 255, 255, 0.15) 0%,
+                    rgba(255, 0, 255, 0.15) 100%);
+                border-color: #00ffff;
+                color: #00ffff;
+                box-shadow: 
+                    0 0 20px rgba(0, 255, 255, 0.3),
+                    inset 0 0 20px rgba(0, 255, 255, 0.1);
+            }
+
+            .gif-btn-apply:hover {
+                background: linear-gradient(135deg, 
+                    rgba(0, 255, 255, 0.3) 0%,
+                    rgba(255, 0, 255, 0.3) 100%);
+                border-color: #00ffff;
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 
+                    0 0 40px rgba(0, 255, 255, 0.6),
+                    0 10px 30px rgba(0, 255, 255, 0.3),
+                    inset 0 0 30px rgba(0, 255, 255, 0.2);
+                text-shadow: 0 0 10px #00ffff;
+            }
+
+            .gif-btn-remove {
+                background: linear-gradient(135deg, 
+                    rgba(255, 0, 128, 0.15) 0%,
+                    rgba(255, 0, 255, 0.15) 100%);
+                border-color: #ff00ff;
+                color: #ff00ff;
+                box-shadow: 
+                    0 0 20px rgba(255, 0, 255, 0.3),
+                    inset 0 0 20px rgba(255, 0, 255, 0.1);
+            }
+
+            .gif-btn-remove:hover {
+                background: linear-gradient(135deg, 
+                    rgba(255, 0, 128, 0.3) 0%,
+                    rgba(255, 0, 255, 0.3) 100%);
+                border-color: #ff00ff;
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 
+                    0 0 40px rgba(255, 0, 255, 0.6),
+                    0 10px 30px rgba(255, 0, 255, 0.3),
+                    inset 0 0 30px rgba(255, 0, 255, 0.2);
+                text-shadow: 0 0 10px #ff00ff;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .menu-button {
+                    width: 52px;
+                    height: 52px;
+                }
+
+                .dropdown-menu {
+                    right: 15px;
+                    min-width: 320px;
+                    max-width: calc(100vw - 30px);
+                    padding: 20px;
+                }
+
+                .menu-item {
+                    padding: 14px 16px;
+                    font-size: 0.9em;
+                }
+            }
+            /* Ultra Animated Premium Notification Bar */
+            .notification-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 65px;
+                background: linear-gradient(135deg,
+                    rgba(15, 12, 41, 0.9) 0%,
+                    rgba(48, 43, 99, 0.9) 50%,
+                    rgba(36, 36, 62, 0.9) 100%
+                );
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                z-index: 999;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                position: relative;
+            }
+
+            .notification-bar.hidden {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            /* Animated particle background */
+            .notification-bar::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background:
+                    radial-gradient(circle, rgba(102, 126, 234, 0.3) 1px, transparent 1px),
+                    radial-gradient(circle, rgba(118, 75, 162, 0.3) 1px, transparent 1px);
+                background-size: 50px 50px, 80px 80px;
+                background-position: 0 0, 25px 25px;
+                animation: particleFloat 20s linear infinite;
+                opacity: 0.4;
+            }
+
+            @keyframes particleFloat {
+                0% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+                100% {
+                    transform: translate(50px, 50px) rotate(360deg);
+                }
+            }
+
+            /* Neon glow line animation */
+            .notification-bar::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: -100%;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #00f3ff 20%,
+                    #00d4ff 40%,
+                    #667eea 60%,
+                    #764ba2 80%,
+                    transparent 100%
+                );
+                box-shadow:
+                    0 0 20px rgba(0, 243, 255, 0.8),
+                    0 0 40px rgba(102, 126, 234, 0.6);
+                animation: neonSweep 4s ease-in-out infinite;
+            }
+
+            @keyframes neonSweep {
+                0%, 100% {
+                    left: -100%;
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    left: 100%;
+                    opacity: 0;
+                }
+            }
+
+            .notification-container {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 30px;
+                position: relative;
+                gap: 20px;
+                z-index: 1;
+            }
+
+            /* 🔥 ULTIMATE LEGENDARY ANIMATED NOTIFICATION BAR 🔥 */
+            .notification-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background:
+                    linear-gradient(135deg,
+                        rgba(10, 10, 35, 0.95) 0%,
+                        rgba(30, 20, 60, 0.95) 25%,
+                        rgba(50, 30, 80, 0.95) 50%,
+                        rgba(30, 20, 60, 0.95) 75%,
+                        rgba(10, 10, 35, 0.95) 100%
+                    );
+                background-size: 400% 400%;
+                backdrop-filter: blur(25px) saturate(200%);
+                -webkit-backdrop-filter: blur(25px) saturate(200%);
+                box-shadow:
+                    0 10px 50px rgba(102, 126, 234, 0.4),
+                    0 20px 100px rgba(118, 75, 162, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                overflow: hidden;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                animation: backgroundPulse 8s ease-in-out infinite;
+            }
+
+            @keyframes backgroundPulse {
+                0%, 100% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+            }
+
+            .notification-bar.hidden {
+                transform: translateY(-120%);
+                opacity: 0;
+            }
+
+            /* Layer 1: Animated Matrix Rain */
+            .notification-bar::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 200%;
+                background-image:
+                    linear-gradient(transparent 0%, rgba(102, 126, 234, 0.4) 50%, transparent 100%),
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(102, 126, 234, 0.15) 2px,
+                        rgba(102, 126, 234, 0.15) 4px
+                    );
+                background-size: 100% 100%, 100% 10px;
+                animation: matrixRain 3s linear infinite;
+                opacity: 0.6;
+            }
+
+            @keyframes matrixRain {
+                0% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(50%);
+                }
+            }
+
+            /* Layer 2: Lightning Bolt Effect */
+            .notification-bar::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #ff00ff 10%,
+                    #00ffff 25%,
+                    #ffff00 40%,
+                    #00ff00 55%,
+                    #ff00ff 70%,
+                    #00ffff 85%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                box-shadow:
+                    0 0 20px currentColor,
+                    0 0 40px currentColor,
+                    0 -5px 60px rgba(102, 126, 234, 0.5);
+                animation:
+                    rainbowSweep 2s linear infinite,
+                    lightningPulse 0.5s ease-in-out infinite alternate;
+            }
+
+            @keyframes rainbowSweep {
+                0% {
+                    background-position: 0% 50%;
+                }
+                100% {
+                    background-position: 200% 50%;
+                }
+            }
+
+            @keyframes lightningPulse {
+                0% {
+                    opacity: 0.6;
+                    filter: brightness(1);
+                }
+                100% {
+                    opacity: 1;
+                    filter: brightness(1.5);
+                }
+            }
+
+            .notification-container {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 35px;
+                position: relative;
+                gap: 25px;
+                z-index: 2;
+            }
+
+            /* 🔥 ULTIMATE LEGENDARY ANIMATED NOTIFICATION BAR 🔥 */
+            .notification-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background:
+                    linear-gradient(135deg,
+                        rgba(10, 10, 35, 0.95) 0%,
+                        rgba(30, 20, 60, 0.95) 25%,
+                        rgba(50, 30, 80, 0.95) 50%,
+                        rgba(30, 20, 60, 0.95) 75%,
+                        rgba(10, 10, 35, 0.95) 100%
+                    );
+                background-size: 400% 400%;
+                backdrop-filter: blur(25px) saturate(200%);
+                -webkit-backdrop-filter: blur(25px) saturate(200%);
+                box-shadow:
+                    0 10px 50px rgba(102, 126, 234, 0.4),
+                    0 20px 100px rgba(118, 75, 162, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                overflow: hidden;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                animation: backgroundPulse 8s ease-in-out infinite;
+            }
+
+            @keyframes backgroundPulse {
+                0%, 100% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+            }
+
+            .notification-bar.hidden {
+                transform: translateY(-120%);
+                opacity: 0;
+            }
+
+            /* Layer 1: Animated Matrix Rain */
+            .notification-bar::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 200%;
+                background-image:
+                    linear-gradient(transparent 0%, rgba(102, 126, 234, 0.4) 50%, transparent 100%),
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(102, 126, 234, 0.15) 2px,
+                        rgba(102, 126, 234, 0.15) 4px
+                    );
+                background-size: 100% 100%, 100% 10px;
+                animation: matrixRain 3s linear infinite;
+                opacity: 0.6;
+            }
+
+            @keyframes matrixRain {
+                0% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(50%);
+                }
+            }
+
+            /* Layer 2: Lightning Bolt Effect */
+            .notification-bar::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #ff00ff 10%,
+                    #00ffff 25%,
+                    #ffff00 40%,
+                    #00ff00 55%,
+                    #ff00ff 70%,
+                    #00ffff 85%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                box-shadow:
+                    0 0 20px currentColor,
+                    0 0 40px currentColor,
+                    0 -5px 60px rgba(102, 126, 234, 0.5);
+                animation:
+                    rainbowSweep 2s linear infinite,
+                    lightningPulse 0.5s ease-in-out infinite alternate;
+            }
+
+            @keyframes rainbowSweep {
+                0% {
+                    background-position: 0% 50%;
+                }
+                100% {
+                    background-position: 200% 50%;
+                }
+            }
+
+            @keyframes lightningPulse {
+                0% {
+                    opacity: 0.6;
+                    filter: brightness(1);
+                }
+                100% {
+                    opacity: 1;
+                    filter: brightness(1.5);
+                }
+            }
+
+            .notification-container {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 35px;
+                position: relative;
+                gap: 25px;
+                z-index: 2;
+            }
+
+            /* 🔥 ULTIMATE LEGENDARY ANIMATED NOTIFICATION BAR 🔥 */
+            .notification-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background:
+                    linear-gradient(135deg,
+                        rgba(10, 10, 35, 0.95) 0%,
+                        rgba(30, 20, 60, 0.95) 25%,
+                        rgba(50, 30, 80, 0.95) 50%,
+                        rgba(30, 20, 60, 0.95) 75%,
+                        rgba(10, 10, 35, 0.95) 100%
+                    );
+                background-size: 400% 400%;
+                backdrop-filter: blur(25px) saturate(200%);
+                -webkit-backdrop-filter: blur(25px) saturate(200%);
+                box-shadow:
+                    0 10px 50px rgba(102, 126, 234, 0.4),
+                    0 20px 100px rgba(118, 75, 162, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                overflow: hidden;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                animation: backgroundPulse 8s ease-in-out infinite;
+            }
+
+            @keyframes backgroundPulse {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+            }
+
+            .notification-bar.hidden {
+                transform: translateY(-120%);
+                opacity: 0;
+            }
+
+            /* Layer 1: Animated Matrix Rain */
+            .notification-bar::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 200%;
+                background-image:
+                    linear-gradient(transparent 0%, rgba(102, 126, 234, 0.4) 50%, transparent 100%),
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(102, 126, 234, 0.15) 2px,
+                        rgba(102, 126, 234, 0.15) 4px
+                    );
+                background-size: 100% 100%, 100% 10px;
+                animation: matrixRain 3s linear infinite;
+                opacity: 0.6;
+            }
+
+            @keyframes matrixRain {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(50%); }
+            }
+
+            /* Layer 2: Lightning Bolt Effect */
+            .notification-bar::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #ff00ff 10%,
+                    #00ffff 25%,
+                    #ffff00 40%,
+                    #00ff00 55%,
+                    #ff00ff 70%,
+                    #00ffff 85%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                box-shadow:
+                    0 0 20px currentColor,
+                    0 0 40px currentColor,
+                    0 -5px 60px rgba(102, 126, 234, 0.5);
+                animation:
+                    rainbowSweep 2s linear infinite,
+                    lightningPulse 0.5s ease-in-out infinite alternate;
+            }
+
+            @keyframes rainbowSweep {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 200% 50%; }
+            }
+
+            @keyframes lightningPulse {
+                0% { opacity: 0.6; filter: brightness(1); }
+                100% { opacity: 1; filter: brightness(1.5); }
+            }
+
+            .notification-container {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 35px;
+                position: relative;
+                gap: 25px;
+                z-index: 2;
+            }
+
+            /* 🔥 ULTIMATE LEGENDARY ANIMATED NOTIFICATION BAR - LIGHT & STABLE 🔥 */
+            .notification-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background:
+                    linear-gradient(135deg,
+                        rgba(10, 10, 35, 0.95) 0%,
+                        rgba(30, 20, 60, 0.95) 25%,
+                        rgba(50, 30, 80, 0.95) 50%,
+                        rgba(30, 20, 60, 0.95) 75%,
+                        rgba(10, 10, 35, 0.95) 100%
+                    );
+                background-size: 400% 400%;
+                backdrop-filter: blur(25px) saturate(200%);
+                -webkit-backdrop-filter: blur(25px) saturate(200%);
+                box-shadow:
+                    0 10px 50px rgba(102, 126, 234, 0.4),
+                    0 20px 100px rgba(118, 75, 162, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+                z-index: 999;
+                overflow: hidden;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                animation: backgroundPulse 8s ease-in-out infinite;
+            }
+
+            @keyframes backgroundPulse {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+            }
+
+            .notification-bar.hidden {
+                transform: translateY(-120%);
+                opacity: 0;
+            }
+
+            /* Matrix Rain Layer */
+            .notification-bar::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 200%;
+                background-image:
+                    linear-gradient(transparent 0%, rgba(102, 126, 234, 0.4) 50%, transparent 100%),
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(102, 126, 234, 0.15) 2px,
+                        rgba(102, 126, 234, 0.15) 4px
+                    );
+                background-size: 100% 100%, 100% 10px;
+                animation: matrixRain 3s linear infinite;
+                opacity: 0.6;
+            }
+
+            @keyframes matrixRain {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(50%); }
+            }
+
+            /* Lightning Bolt Layer */
+            .notification-bar::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #ff00ff 10%,
+                    #00ffff 25%,
+                    #ffff00 40%,
+                    #00ff00 55%,
+                    #ff00ff 70%,
+                    #00ffff 85%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                box-shadow:
+                    0 0 20px currentColor,
+                    0 0 40px currentColor,
+                    0 -5px 60px rgba(102, 126, 234, 0.5);
+                animation:
+                    rainbowSweep 2s linear infinite,
+                    lightningPulse 0.5s ease-in-out infinite alternate;
+            }
+
+            @keyframes rainbowSweep {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 200% 50%; }
+            }
+
+            @keyframes lightningPulse {
+                0% { opacity: 0.6; filter: brightness(1); }
+                100% { opacity: 1; filter: brightness(1.5); }
+            }
+
+            .notification-container {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 35px;
+                position: relative;
+                gap: 25px;
+                z-index: 2;
+            }
+
+            /* Label WITHOUT Rotating Light */
+            .notification-label {
+                position: relative;
+                color: #fff;
+                font-weight: 900;
+                font-size: 0.9em;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                padding: 12px 24px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(102, 126, 234, 0.9) 0%,
+                    rgba(118, 75, 162, 0.9) 50%,
+                    rgba(102, 126, 234, 0.9) 100%
+                );
+                background-size: 200% 200%;
+                border-radius: 30px;
+                white-space: nowrap;
+                text-shadow:
+                    0 0 10px rgba(102, 126, 234, 1),
+                    0 0 20px rgba(118, 75, 162, 0.8),
+                    0 0 30px rgba(102, 126, 234, 0.6),
+                    0 2px 5px rgba(0, 0, 0, 0.8);
+                box-shadow:
+                    0 0 30px rgba(102, 126, 234, 0.8),
+                    0 0 60px rgba(118, 75, 162, 0.6),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                    inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+                animation:
+                    labelBreath 3s ease-in-out infinite,
+                    labelShake 5s ease-in-out infinite,
+                    backgroundShift 4s ease-in-out infinite;
+            }
+
+            .notification-label::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 150%;
+                height: 150%;
+                background:
+                    radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%),
+                    conic-gradient(
+                        from 0deg,
+                        transparent 0%,
+                        rgba(255, 255, 255, 0.4) 5%,
+                        transparent 10%,
+                        transparent 20%,
+                        rgba(255, 255, 255, 0.4) 25%,
+                        transparent 30%
+                    );
+                transform: translate(-50%, -50%);
+                animation: lightBeam 4s linear infinite;
+                pointer-events: none;
+            }
+
+            @keyframes labelBreath {
+                0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.6); }
+                50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(102, 126, 234, 1), 0 0 100px rgba(118, 75, 162, 0.8); }
+            }
+
+            @keyframes labelShake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-1px); }
+                20%, 40%, 60%, 80% { transform: translateX(1px); }
+            }
+
+            @keyframes backgroundShift {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+            }
+
+            @keyframes lightBeam {
+                0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.3; }
+                50% { opacity: 0.8; }
+                100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.3; } /* Stable: no rotation */
+            }
+
+            /* Floating Particles */
+            .notification-container::before {
+                content: '✨';
+                position: absolute;
+                left: 35px;
+                font-size: 1.2em;
+                animation: floatParticle1 3s ease-in-out infinite, sparkle 1s ease-in-out infinite;
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+            }
+
+            .notification-container::after {
+                content: '⭐';
+                position: absolute;
+                left: 185px;
+                font-size: 1em;
+                animation: floatParticle2 3s ease-in-out infinite, sparkle 1.5s ease-in-out infinite;
+                filter: drop-shadow(0 0 10px rgba(255, 100, 255, 1));
+            }
+
+            @keyframes floatParticle1 {
+                0%, 100% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-10px) scale(1.3); }
+            }
+
+            @keyframes floatParticle2 {
+                0%, 100% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-15px) scale(1.2); }
+            }
+
+            @keyframes sparkle {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+            }
+
+            /* Scrolling Notifications */
+            .notification-scroll { flex: 1; overflow: hidden; height: 100%; mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%); }
+            .notification-content { display: flex; align-items: center; height: 100%; animation: megaScroll 35s linear infinite; white-space: nowrap; gap: 80px; }
+            .notification-content:hover { animation-play-state: paused; }
+
+            @keyframes megaScroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            /* Notification Items */
+            .notification-item {
+                color: #fff;
+                font-size: 1em;
+                padding: 0 60px;
+                font-weight: 700;
+                text-shadow: 0 0 10px rgba(0, 243, 255, 0.8), 0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(118, 75, 162, 0.4), 0 2px 5px rgba(0, 0, 0, 0.8);
+                display: inline-flex;
+                align-items: center;
+                gap: 15px;
+                letter-spacing: 1px;
+                position: relative;
+                animation: textWave 3s ease-in-out infinite;
+            }
+
+            @keyframes textWave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+            .notification-item::after {
+                content: '';
+                position: absolute;
+                right: 20px;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: radial-gradient(circle, #00ffff 0%, #0080ff 100%);
+                box-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff, 0 0 60px rgba(0, 128, 255, 0.5);
+                animation: orbPulse 2s ease-in-out infinite, orbFloat 3s ease-in-out infinite;
+            }
+
+            @keyframes orbPulse { 0%,100% { transform: scale(0.8); opacity:0.6; } 50% { transform: scale(1.5); opacity:1; } }
+            @keyframes orbFloat { 0%,100% { transform: translateY(0) translateX(0); } 25% { transform: translateY(-5px) translateX(2px); } 75% { transform: translateY(5px) translateX(-2px); } }
+
+            /* Bell & Glow */
+            .notification-item::before {
+                content: '🔔';
+                font-size: 1.5em;
+                display: inline-block;
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1)) drop-shadow(0 0 30px rgba(255, 165, 0, 0.8));
+                animation: epicBell 3.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite, bellGlowPulse 2s ease-in-out infinite alternate, bellBounce 3s ease-in-out infinite;
+                transform-origin: top center;
+            }
+
+            @keyframes epicBell { 0%,80%,100%{transform:rotate(0deg) scale(1);} 82%,86%,90%,94%{transform:rotate(-30deg) scale(1.15);} 84%,88%,92%,96%{transform:rotate(30deg) scale(1.15);} 98%{transform:rotate(0deg) scale(1.1);} }
+            @keyframes bellGlowPulse { 0%{filter:drop-shadow(0 0 15px rgba(255,215,0,1)) drop-shadow(0 0 30px rgba(255,165,0,0.8));} 100%{filter:drop-shadow(0 0 25px rgba(255,215,0,1)) drop-shadow(0 0 50px rgba(255,165,0,1)) drop-shadow(0 0 75px rgba(255,100,0,0.6));} }
+            @keyframes bellBounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-3px);} }
+
+            /* Glowing Text */
+            .notification-item strong, .notification-item b {
+                color: #00ffff;
+                text-shadow: 0 0 10px #00ffff,0 0 20px #00ffff,0 0 30px #0080ff,0 0 40px #0080ff;
+                font-weight:900;
+                animation: textGlow 2s ease-in-out infinite alternate, textPulse 3s ease-in-out infinite;
+                display:inline-block;
+            }
+            @keyframes textGlow { 0%{text-shadow:0 0 10px #00ffff,0 0 20px #00ffff,0 0 30px #0080ff;} 100%{text-shadow:0 0 20px #00ffff,0 0 40px #00ffff,0 0 60px #0080ff,0 0 80px #0040ff;} }
+            @keyframes textPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+
+            .notification-item:hover { animation: textWave 3s ease-in-out infinite, rainbowText 2s linear infinite; }
+            @keyframes rainbowText { 0%{color:#ff0000;}16%{color:#ff7f00;}33%{color:#ffff00;}50%{color:#00ff00;}66%{color:#0000ff;}83%{color:#8b00ff;}100%{color:#ff0000;} }
+
+            /* Responsive */
+            @media (max-width:768px){
+            .notification-bar{height:60px;}
+            .notification-container{padding:0 20px;gap:15px;}
+            .notification-label{font-size:0.7em;padding:10px 16px;letter-spacing:2px;}
+            .notification-item{font-size:0.85em;padding:0 40px;gap:10px;}
+            .notification-item::before{font-size:1.2em;}
+            .notification-item::after{width:10px;height:10px;}
+            }
+
+
+
+            .notification-item::before {
+                content: '🔔';
+                font-size: 1.2em;
+                animation: ring 3s ease-in-out infinite;
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            }
+
+            @keyframes ring {
+                0%, 100% { transform: rotate(0deg); }
+                10%, 30% { transform: rotate(-15deg); }
+                20%, 40% { transform: rotate(15deg); }
+                50% { transform: rotate(0deg); }
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .header {
+                text-align: center;
+                color: white;
+                margin-bottom: 40px;
+            }
+
+            .header h1 {
+                font-size: 2.8em;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            }
+
+            .header p {
+                font-size: 1.2em;
+                opacity: 0.95;
+            }
+
+            .main-card {
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            }
+
+            .platform-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 12px;
+                margin-bottom: 30px;
+            }
+
+            .platform-btn {
+                padding: 15px 8px;
+                border: 2px solid #e0e0e0;
+                border-radius: 12px;
+                background: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 0.85em;
+                font-weight: 600;
+                color: #555;
+                text-transform: capitalize;
+            }
+
+            .platform-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                border-color: #667eea;
+            }
+
+            .platform-btn.active {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border-color: transparent;
+                transform: translateY(-2px);
+            }
+
+            .selected-info {
+                text-align: center;
+                margin-bottom: 25px;
+                padding: 15px;
+                background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+                border-radius: 10px;
+                font-size: 1.1em;
+                color: #667eea;
+                font-weight: 600;
+            }
+
+            .input-section {
+                margin-bottom: 25px;
+            }
+
+            .input-group {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+
+            input[type="text"] {
+                flex: 1;
+                padding: 18px 22px;
+                border: 2px solid #e0e0e0;
+                border-radius: 12px;
+                font-size: 1em;
+                transition: all 0.3s;
+            }
+
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+            .download-btn {
+                padding: 18px 45px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                white-space: nowrap;
+            }
+
+            .download-btn:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            .download-btn:disabled {
+                background: linear-gradient(135deg, #ccc 0%, #999 100%);
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .loading {
+                display: none;
+                text-align: center;
+                margin: 25px 0;
+            }
+
+            .spinner {
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #667eea;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+                margin: 0 auto 15px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            .loading p {
+                color: #667eea;
+                font-weight: 600;
+                font-size: 1.05em;
+            }
+
+            .error {
+                display: none;
+                padding: 18px 20px;
+                background: #fee;
+                color: #c00;
+                border-radius: 10px;
+                margin-top: 15px;
+                border-left: 4px solid #c00;
+                font-weight: 500;
+            }
+
+            .result {
+                display: none;
+                margin-top: 30px;
+            }
+
+            .result-header {
+                background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 12px 12px 0 0;
+                font-size: 1.3em;
+                font-weight: 600;
+            }
+
+            .video-preview {
+                background: #f8f9fa;
+                padding: 25px;
+                border-radius: 0 0 12px 12px;
+            }
+
+            .video-thumbnail {
+                width: 100%;
+                max-width: 400px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            .video-info {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            }
+
+            .info-row {
+                display: flex;
+                padding: 10px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .info-row:last-child {
+                border-bottom: none;
+            }
+
+            .info-label {
+                font-weight: 700;
+                color: #333;
+                min-width: 120px;
+                font-size: 0.95em;
+            }
+
+            .info-value {
+                color: #666;
+                flex: 1;
+                font-size: 0.95em;
+            }
+
+            .download-section {
+                margin-top: 20px;
+            }
+
+            .section-title {
+                font-size: 1.1em;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #667eea;
+            }
+
+            .download-links {
+                display: grid;
+                gap: 12px;
+            }
+
+            .download-link {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px 20px;
+                background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                color: white;
+                text-decoration: none;
+                border-radius: 10px;
+                transition: all 0.3s;
+                font-weight: 600;
+                cursor: pointer;
+                border: none;
+                width: 100%;
+                font-size: 1em;
+            }
+
+            .download-link:hover {
+                transform: translateX(5px);
+                box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            }
+
+            .download-link-audio {
+                background: linear-gradient(135deg, #6f42c1 0%, #563d7c 100%);
+            }
+
+            .download-link-audio:hover {
+                box-shadow: 0 5px 15px rgba(111, 66, 193, 0.3);
+            }
+
+            .quality-badge {
+                background: rgba(255,255,255,0.2);
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.85em;
+                margin-left: 10px;
+            }
+
+            .downloading-msg {
+                display: none;
+                text-align: center;
+                padding: 15px;
+                background: #d4edda;
+                color: #155724;
+                border-radius: 10px;
+                margin-top: 15px;
+                font-weight: 600;
+                border: 2px solid #c3e6cb;
+            }
+
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 2em;
+                }
+
+                .main-card {
+                    padding: 25px;
+                }
+
+                .platform-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+                    gap: 10px;
+                }
+
+                .platform-btn {
+                    padding: 12px 5px;
+                    font-size: 0.75em;
+                }
+
+                .input-group {
+                    flex-direction: column;
+                }
+
+                .download-btn {
+                    width: 100%;
+                    padding: 16px;
+                }
+            }
+        </style>
+    </head>
+            <body>
+                <!-- 3-Dot Menu Button -->
+                <div class="menu-button" id="menuButton">
+                    <div class="menu-dot"></div>
+                    <div class="menu-dot"></div>
+                    <div class="menu-dot"></div>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#" class="menu-item" id="uploadLink">
+                        <span class="menu-item-icon">📤</span>
+                        <span>Upload Project</span>
+                    </a>
+                    <a href="#" class="menu-item" id="contact">
+                        <span class="menu-item-icon">🚀</span>
+                        <span>contact</span>
+                    </a>
+
+                    <a href="#" class="menu-item" id="test">
+                        <span class="menu-item-icon">🧪</span>
+                        <span>TEST</span>
+                    </a>
+
+                    <a href="#" class="menu-item" id="aboutLink">
+                        <span class="menu-item-icon">ℹ️</span>
+                        <span>About</span>
+                    </a>
+                </div>
+
+
+                <!-- Liquid Glass Notification Bar -->
+                <div class="notification-bar" id="notificationBar">
+                    <div class="notification-container">
+                        <div class="notification-label">📢 Updates</div>
+                        <div class="notification-scroll">
+                            <div class="notification-content" id="notificationContent">
+                                <span class="notification-item">🔐 Enjoy the newest 17+ videos with full privacy. 💾 Tap to download safely and keep everything in your personal vault. Brought to you by Asmit Adk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="header">
+                        <h1>🎥 Universal Media Downloader</h1>
+                        <p>Download videos & audio from 17+ platforms instantly</p>
+                    </div>
+
+                    <div class="main-card">
+                        <div class="platform-grid" id="platformGrid"></div>
+
+                        <div class="selected-info" id="selectedInfo">
+                            👆 Select a platform to get started
+                        </div>
+
+                        <div class="input-section">
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    id="urlInput" 
+                                    placeholder="Paste your video/audio URL here..."
+                                    autocomplete="off"
+                                >
+                                <button class="download-btn" id="downloadBtn" onclick="fetchMedia()">
+                                    📥 Get Download Links
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p>Fetching media from server...</p>
+                        </div>
+
+                        <div class="downloading-msg" id="downloadingMsg">
+                            ⬇️ Download starting... Check your downloads folder!
+                        </div>
+
+                        <div class="error" id="error"></div>
+
+                        <div class="result" id="result"></div>
+                    </div>
+                </div>
+
+                    <script>
+                        const API_BASE = 'https://asmitdwn20.vercel.app';
+
+                        const platforms = [
+                            { name: 'bluesky', endpoint: '/api/bluesky/download', icon: '🦋' },
+                            { name: 'capcut', endpoint: '/api/capcut/download', icon: '✂️' },
+                            { name: 'dailymotion', endpoint: '/api/dailymotion/download', icon: '🎬' },
+                            { name: 'douyin', endpoint: '/api/douyin/download', icon: '🎵' },
+                            { name: 'kuaishou', endpoint: '/api/kuaishou/download', icon: '⚡' },
+                            { name: 'linkedin', endpoint: '/api/linkedin/download', icon: '💼' },
+                            { name: 'meta', endpoint: '/api/meta/download', icon: '📘' },
+                            { name: 'pinterest', endpoint: '/api/pinterest/download', icon: '📌' },
+                            { name: 'reddit', endpoint: '/api/reddit/download', icon: '🤖' },
+                            { name: 'snapchat', endpoint: '/api/snapchat/download', icon: '👻' },
+                            { name: 'spotify', endpoint: '/api/spotify/download', icon: '🎧' },
+                            { name: 'soundcloud', endpoint: '/api/soundcloud/download', icon: '☁️' },
+                            { name: 'threads', endpoint: '/api/threads/download', icon: '🧵' },
+                            { name: 'tiktok', endpoint: '/api/tiktok/download', icon: '🎵' },
+                            { name: 'tumblr', endpoint: '/api/tumblr/download', icon: '📝' },
+                            { name: 'twitter', endpoint: '/api/twitter/download', icon: '🐦' },
+                            { name: 'youtube', endpoint: '/api/youtube/download', icon: '▶️' }
+                        ];
+
+                        let selectedPlatform = null;
+
+                        // Check and hide notification bar if empty
+                        function checkNotificationBar() {
+                            const notificationContent = document.getElementById('notificationContent');
+                            const notificationBar = document.getElementById('notificationBar');
+                            const notificationItems = notificationContent.querySelectorAll('.notification-item');
+
+                            let hasContent = false;
+                            notificationItems.forEach(item => {
+                                if (item.textContent.trim().length > 0) {
+                                    hasContent = true;
+                                }
+                            });
+
+                            if (!hasContent) {
+                                notificationBar.classList.add('hidden');
+                                document.body.style.paddingTop = '20px';
+                            }
+                        }
+
+                        // 3-Dot Menu Toggle
+                        document.getElementById('menuButton').addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const dropdown = document.getElementById('dropdownMenu');
+                            dropdown.classList.toggle('show');
+                        });
+
+                        // Close dropdown when clicking outside
+                        document.addEventListener('click', function(e) {
+                            const dropdown = document.getElementById('dropdownMenu');
+                            const menuButton = document.getElementById('menuButton');
+
+                            if (!dropdown.contains(e.target) && !menuButton.contains(e.target)) {
+                                dropdown.classList.remove('show');
+                            }
+                        });
+
+                        // Menu item actions
+                        document.getElementById('uploadLink').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            window.open('YOUR_UPLOAD_PROJECT_URL', '_blank');
+                        });
+
+                        document
+                        .getElementById("test")
+                        .addEventListener("click", function (e) {
+                            e.preventDefault();
+                            window.open("asmit.html", "_self"); // Opens asmit.html in the same tab
+                        });
+
+
+                        document.getElementById('contact').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            window.open('https://www.tiktok.com/@yoursssstory?is_from_webapp=1&sender_device=pc', '_blank');
+                        });
+
+                        document.getElementById('aboutLink').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            alert('Universal Media Downloader v1.0\nCreated by Asmit Adk\n\nDownload videos & audio from 17+ platforms instantly!');
+                        });
+
+
+            // Load notifications from noti.html
+            async function loadNotifications() {
+                try {
+                    const response = await fetch("noti.html");
+                    const html = await response.text();
+
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, "text/html");
+                    const notificationItems =
+                        doc.querySelectorAll(".notification-item");
+
+                    if (notificationItems.length > 0) {
+                        const content = Array.from(notificationItems)
+                            .map((item) => item.outerHTML)
+                            .join("");
+                        document.getElementById(
+                            "notificationContent",
+                        ).innerHTML = content + content;
+                    }
+                } catch (error) {
+                    console.error("Error loading notifications:", error);
+                }
+
+                checkNotificationBar();
+            }
+
+            function initPlatforms() {
+                const grid = document.getElementById("platformGrid");
+                platforms.forEach((platform) => {
+                    const btn = document.createElement("button");
+                    btn.className = "platform-btn";
+                    btn.innerHTML = `${platform.icon} ${platform.name}`;
+                    btn.onclick = () => selectPlatform(platform, btn);
+                    grid.appendChild(btn);
+                });
+            }
+
+            function selectPlatform(platform, btnElement) {
+                selectedPlatform = platform;
+
+                document.querySelectorAll(".platform-btn").forEach((btn) => {
+                    btn.classList.remove("active");
+                });
+
+                btnElement.classList.add("active");
+
+                document.getElementById("selectedInfo").innerHTML =
+                    `${platform.icon} <strong>${platform.name.toUpperCase()}</strong> selected - Paste URL and click Get Download Links`;
+
+                hideError();
+                hideResult();
+                hideDownloadingMsg();
+                document.getElementById("urlInput").focus();
+            }
+
+            async function fetchMedia() {
+                const url = document.getElementById("urlInput").value.trim();
+
+                if (!selectedPlatform) {
+                    showError("⚠️ Please select a platform first!");
+                    return;
+                }
+
+                if (!url) {
+                    showError("⚠️ Please enter a video/audio URL!");
+                    return;
+                }
+
+                if (!isValidUrl(url)) {
+                    showError(
+                        "⚠️ Please enter a valid URL starting with http:// or https://",
+                    );
+                    return;
+                }
+
+                hideError();
+                hideResult();
+                hideDownloadingMsg();
+                showLoading();
+
+                try {
+                    const apiUrl = `${API_BASE}${selectedPlatform.endpoint}?url=${encodeURIComponent(url)}`;
+                    console.log("Fetching from:", apiUrl);
+
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+
+                    console.log("Full API Response:", data);
+                    hideLoading();
+
+                    if (!response.ok || data.error || data.status === "error") {
+                        showError(
+                            `❌ ${data.error || data.message || "Failed to fetch media. Please check the URL and try again."}`,
+                        );
+                        return;
+                    }
+
+                    displayResult(data);
+                } catch (error) {
+                    hideLoading();
+                    console.error("Error:", error);
+                    showError(
+                        `❌ Network error: ${error.message}. Please check your connection and try again.`,
+                    );
+                }
+            }
+
+            function isValidUrl(string) {
+                try {
+                    const url = new URL(string);
+                    return (
+                        url.protocol === "http:" || url.protocol === "https:"
+                    );
+                } catch (_) {
+                    return false;
+                }
+            }
+
+            function displayResult(apiResponse) {
+                const resultDiv = document.getElementById("result");
+
+                let data =
+                    apiResponse.data || apiResponse.result || apiResponse;
+
+                console.log("Displaying data:", data);
+
+                let html =
+                    '<div class="result-header">✅ Media Ready for Download!</div>';
+                html += '<div class="video-preview">';
+
+                if (data.thumbnail || data.cover || data.image || data.thumb) {
+                    const thumb =
+                        data.thumbnail ||
+                        data.cover ||
+                        data.image ||
+                        data.thumb;
+                    html += `<img src="${thumb}" alt="Thumbnail" class="video-thumbnail" onerror="this.style.display='none'">`;
+                }
+
+                if (
+                    data.title ||
+                    data.author ||
+                    data.username ||
+                    data.unique_id ||
+                    data.duration ||
+                    data.views
+                ) {
+                    html += '<div class="video-info">';
+
+                    if (data.title) {
+                        html += `<div class="info-row">
+                        <div class="info-label">📝 Title:</div>
+                        <div class="info-value">${escapeHtml(data.title)}</div>
+                    </div>`;
+                    }
+
+                    if (data.author || data.username || data.unique_id) {
+                        html += `<div class="info-row">
+                        <div class="info-label">👤 Author:</div>
+                        <div class="info-value">${escapeHtml(data.author || data.username || data.unique_id)}</div>
+                    </div>`;
+                    }
+
+                    if (data.duration) {
+                        const durationText =
+                            typeof data.duration === "number"
+                                ? formatDuration(data.duration)
+                                : data.duration;
+                        html += `<div class="info-row">
+                        <div class="info-label">⏱️ Duration:</div>
+                        <div class="info-value">${durationText}</div>
+                    </div>`;
+                    }
+
+                    if (data.views) {
+                        html += `<div class="info-row">
+                        <div class="info-label">👁️ Views:</div>
+                        <div class="info-value">${formatNumber(data.views)}</div>
+                    </div>`;
+                    }
+
+                    html += "</div>";
+                }
+
+                html += '<div class="download-section">';
+                html +=
+                    '<div class="section-title">📥 Available Downloads</div>';
+                html += '<div class="download-links">';
+
+                let hasDownloads = false;
+
+                // YouTube format: formats array
+                if (
+                    data.formats &&
+                    Array.isArray(data.formats) &&
+                    data.formats.length > 0
+                ) {
+                    data.formats.forEach((item, index) => {
+                        if (item.url) {
+                            const quality =
+                                item.quality || `Format ${index + 1}`;
+                            const isAudio =
+                                item.type === "audio" ||
+                                (quality &&
+                                    quality.toLowerCase().includes("audio"));
+
+                            html += createDownloadLink(
+                                item.url,
+                                isAudio ? "🎵 Audio" : "🎬 Video",
+                                quality,
+                                isAudio,
+                            );
+                            hasDownloads = true;
+                        }
+                    });
+                }
+
+                // Meta/Pinterest/CapCut/TikTok format: downloads array
+                if (
+                    !hasDownloads &&
+                    data.downloads &&
+                    Array.isArray(data.downloads) &&
+                    data.downloads.length > 0
+                ) {
+                    data.downloads.forEach((item, index) => {
+                        if (item.url) {
+                            // Extract quality from text field (e.g., "Download MP4 HD", "Download MP3")
+                            const text =
+                                item.text ||
+                                item.quality ||
+                                item.resolution ||
+                                item.format ||
+                                `Quality ${index + 1}`;
+
+                            // Determine if it's audio based on text or type
+                            const isAudio =
+                                item.type === "audio" ||
+                                (text &&
+                                    (text.toLowerCase().includes("mp3") ||
+                                        text.toLowerCase().includes("audio")));
+
+                            // Extract quality label from text (remove "Download" prefix)
+                            let quality = text
+                                .replace(/^Download\s+/i, "")
+                                .trim();
+
+                            html += createDownloadLink(
+                                item.url,
+                                isAudio ? "🎵 Audio" : "🎬 Video",
+                                quality,
+                                isAudio,
+                            );
+                            hasDownloads = true;
+                        }
+                    });
+                }
+
+                // CapCut format: medias array
+                if (
+                    !hasDownloads &&
+                    data.medias &&
+                    Array.isArray(data.medias) &&
+                    data.medias.length > 0
+                ) {
+                    data.medias.forEach((media, index) => {
+                        if (media.url) {
+                            const quality =
+                                media.quality ||
+                                media.resolution ||
+                                `Option ${index + 1}`;
+                            const isAudio = media.type === "audio";
+
+                            html += createDownloadLink(
+                                media.url,
+                                isAudio ? "🎵 Audio" : "🎬 Video",
+                                quality,
+                                isAudio,
+                            );
+                            hasDownloads = true;
+                        }
+                    });
+                }
+
+                // Meta nested format: data.data array
+                if (
+                    !hasDownloads &&
+                    data.data &&
+                    Array.isArray(data.data) &&
+                    data.data.length > 0
+                ) {
+                    data.data.forEach((item, index) => {
+                        if (item.url) {
+                            const quality =
+                                item.resolution ||
+                                item.quality ||
+                                `Quality ${index + 1}`;
+                            const isAudio = item.type === "audio";
+
+                            html += createDownloadLink(
+                                item.url,
+                                isAudio ? "🎵 Audio" : "🎬 Video",
+                                quality,
+                                isAudio,
+                            );
+                            hasDownloads = true;
+                        }
+                    });
+                }
+
+                // Alternative: Check for videos array
+                if (
+                    !hasDownloads &&
+                    data.videos &&
+                    Array.isArray(data.videos) &&
+                    data.videos.length > 0
+                ) {
+                    data.videos.forEach((video, index) => {
+                        if (video.url) {
+                            const quality =
+                                video.quality ||
+                                video.resolution ||
+                                `${video.width}x${video.height}` ||
+                                `Video ${index + 1}`;
+
+                            html += createDownloadLink(
+                                video.url,
+                                "🎬 Video",
+                                quality,
+                                false,
+                            );
+                            hasDownloads = true;
+                        }
+                    });
+                }
+
+                // Alternative: Check for audio
+                if (data.audio) {
+                    html += createDownloadLink(
+                        data.audio,
+                        "🎵 Audio",
+                        "MP3",
+                        true,
+                    );
+                    hasDownloads = true;
+                }
+
+                // Alternative: Check for simple video fields
+                if (!hasDownloads) {
+                    const videoFields = [
+                        "video",
+                        "videoUrl",
+                        "url",
+                        "download",
+                        "downloadUrl",
+                        "link",
+                    ];
+
+                    for (let field of videoFields) {
+                        if (
+                            data[field] &&
+                            typeof data[field] === "string" &&
+                            data[field].startsWith("http")
+                        ) {
+                            const quality =
+                                data.quality || data.resolution || "HD";
+                            html += createDownloadLink(
+                                data[field],
+                                "🎬 Video",
+                                quality,
+                                false,
+                            );
+                            hasDownloads = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Alternative: Check for HD/SD variants
+                if (!hasDownloads) {
+                    if (data.videoHD) {
+                        html += createDownloadLink(
+                            data.videoHD,
+                            "🎬 Video",
+                            "HD",
+                            false,
+                        );
+                        hasDownloads = true;
+                    }
+                    if (data.videoSD) {
+                        html += createDownloadLink(
+                            data.videoSD,
+                            "🎬 Video",
+                            "SD",
+                            false,
+                        );
+                        hasDownloads = true;
+                    }
+                }
+
+                if (!hasDownloads) {
+                    html += `<div style="padding: 20px; text-align: center; color: #c00; background: #fee; border-radius: 10px;">
+                    ❌ No download links found in API response<br><br>
+                    <strong>Debug Info:</strong><br>
+                    <div style="text-align: left; background: white; padding: 15px; border-radius: 5px; margin-top: 10px; max-height: 300px; overflow: auto;">
+                        <pre style="font-size: 11px; white-space: pre-wrap; word-wrap: break-word;">${JSON.stringify(apiResponse, null, 2)}</pre>
+                    </div>
+                </div>`;
+                }
+
+                html += "</div></div></div>";
+
+                resultDiv.innerHTML = html;
+                resultDiv.style.display = "block";
+                resultDiv.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                });
+            }
+
+            function formatDuration(milliseconds) {
+                const seconds = Math.floor(milliseconds / 1000);
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+
+                if (minutes > 0) {
+                    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+                }
+                return `${seconds}s`;
+            }
+
+            function createDownloadLink(url, label, quality, isAudio) {
+                const className = isAudio
+                    ? "download-link download-link-audio"
+                    : "download-link";
+
+                return `
+                <a href="${escapeHtml(url)}" 
+                   class="${className}" 
+                   download
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <span>${label}</span>
+                    <span class="quality-badge">${escapeHtml(quality)}</span>
+                </a>
+            `;
+            }
+
+            function escapeHtml(text) {
+                if (!text) return "";
+                const div = document.createElement("div");
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function formatNumber(num) {
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + "M";
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + "K";
+                }
+                return num.toString();
+            }
+
+            function showLoading() {
+                document.getElementById("loading").style.display = "block";
+                document.getElementById("downloadBtn").disabled = true;
+            }
+
+            function hideLoading() {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("downloadBtn").disabled = false;
+            }
+
+            function showDownloadingMsg() {
+                document.getElementById("downloadingMsg").style.display =
+                    "block";
+            }
+
+            function hideDownloadingMsg() {
+                document.getElementById("downloadingMsg").style.display =
+                    "none";
+            }
+
+            function showError(message) {
+                const errorDiv = document.getElementById("error");
+                errorDiv.textContent = message;
+                errorDiv.style.display = "block";
+                errorDiv.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                });
+            }
+
+            function hideError() {
+                document.getElementById("error").style.display = "none";
+            }
+
+            function hideResult() {
+                document.getElementById("result").style.display = "none";
+            }
+
+            document
+                .getElementById("urlInput")
+                .addEventListener("keypress", (e) => {
+                    if (e.key === "Enter") {
+                        fetchMedia();
+                    }
+                });
+
+            document
+                .getElementById("urlInput")
+                .addEventListener("paste", (e) => {
+                    setTimeout(() => {
+                        const url = e.target.value.trim();
+                        if (url && !selectedPlatform) {
+                            const detectedPlatform = detectPlatform(url);
+                            if (detectedPlatform) {
+                                selectPlatformByName(detectedPlatform);
+                            }
+                        }
+                    }, 100);
+                });
+
+            function detectPlatform(url) {
+                const urlLower = url.toLowerCase();
+                if (urlLower.includes("tiktok.com")) return "tiktok";
+                if (
+                    urlLower.includes("youtube.com") ||
+                    urlLower.includes("youtu.be")
+                )
+                    return "youtube";
+                if (
+                    urlLower.includes("instagram.com") ||
+                    urlLower.includes("facebook.com") ||
+                    urlLower.includes("fb.com")
+                )
+                    return "meta";
+                if (
+                    urlLower.includes("twitter.com") ||
+                    urlLower.includes("x.com")
+                )
+                    return "twitter";
+                if (urlLower.includes("reddit.com")) return "reddit";
+                if (urlLower.includes("pinterest.com")) return "pinterest";
+                if (urlLower.includes("linkedin.com")) return "linkedin";
+                if (urlLower.includes("soundcloud.com")) return "soundcloud";
+                if (urlLower.includes("spotify.com")) return "spotify";
+                if (urlLower.includes("snapchat.com")) return "snapchat";
+                if (urlLower.includes("threads.net")) return "threads";
+                if (urlLower.includes("tumblr.com")) return "tumblr";
+                if (urlLower.includes("dailymotion.com")) return "dailymotion";
+                if (urlLower.includes("douyin.com")) return "douyin";
+                if (urlLower.includes("kuaishou.com")) return "kuaishou";
+                if (urlLower.includes("capcut.com")) return "capcut";
+                if (urlLower.includes("bsky.app")) return "bluesky";
+                return null;
+            }
+
+            function selectPlatformByName(name) {
+                const platform = platforms.find((p) => p.name === name);
+                if (platform) {
+                    const buttons = document.querySelectorAll(".platform-btn");
+                    buttons.forEach((btn) => {
+                        if (btn.textContent.toLowerCase().includes(name)) {
+                            btn.click();
+                        }
+                    });
+                }
+            }
+
+
+            initPlatforms();
+                </script>
+
+                <!-- PWA Installation Script -->
+                <script>
+                    // Register Service Worker
+                    if ('serviceWorker' in navigator) {
+                        window.addEventListener('load', () => {
+                            navigator.serviceWorker.register('/service-worker.js')
+                                .then((registration) => {
+                                    console.log('✅ Service Worker registered');
+                                })
+                                .catch((error) => {
+                                    console.log('❌ Service Worker registration failed:', error);
+                                });
+                        });
+                    }
+
+                    // PWA Install Prompt
+                    let deferredPrompt;
+                    const installButton = document.createElement('button');
+                    installButton.textContent = '📱 Install App';
+                    installButton.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        padding: 15px 25px;
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 50px;
+                        font-weight: 600;
+                        font-size: 16px;
+                        cursor: pointer;
+                        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+                        z-index: 9999;
+                        display: none;
+                        animation: slideIn 0.5s ease;
+                    `;
+
+                    window.addEventListener('beforeinstallprompt', (e) => {
+                        e.preventDefault();
+                        deferredPrompt = e;
+                        installButton.style.display = 'block';
+                        document.body.appendChild(installButton);
+                    });
+
+                    installButton.addEventListener('click', async () => {
+                        if (!deferredPrompt) return;
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        console.log(`User response: ${outcome}`);
+                        deferredPrompt = null;
+                        installButton.style.display = 'none';
+                    });
+
+                    window.addEventListener('appinstalled', () => {
+                        console.log('✅ PWA installed successfully!');
+                        installButton.style.display = 'none';
+                    });
+                </script>
+
+    </body>
+</html>
