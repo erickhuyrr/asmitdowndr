@@ -1,0 +1,26 @@
+{
+  "name": "asmit-platform-video-downloader",
+  "version": "1.0.0",
+  "description": "Download videos and audio from 17+ platforms instantly",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'No build needed - static site'",
+    "deploy": "vercel --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/your-repo-name.git"
+  },
+  "keywords": [
+    "video-downloader",
+    "pwa",
+    "media-downloader",
+    "asmit",
+    "vercel"
+  ],
+  "author": "Asmit Adk",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
